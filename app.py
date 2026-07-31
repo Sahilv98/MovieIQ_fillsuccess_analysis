@@ -33,81 +33,147 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* ---------- MAIN APP ---------- */
+/* ===========================
+   MAIN APP
+=========================== */
 
 .stApp{
-    background-color:white !important;
+    background-color:#FFFFFF !important;
 }
 
 [data-testid="stAppViewContainer"]{
-    background:white !important;
+    background:#FFFFFF !important;
 }
 
 [data-testid="stHeader"]{
-    background:white !important;
+    background:#FFFFFF !important;
+    border-bottom:none;
 }
 
-/* ---------- SIDEBAR ---------- */
+/* ===========================
+   SIDEBAR
+=========================== */
 
 section[data-testid="stSidebar"]{
-    background:#F5F5F5 !important;
+    background:#F7F7F7 !important;
 }
 
 section[data-testid="stSidebar"] *{
-    color:black !important;
+    color:#111111 !important;
 }
 
-/* ---------- FILE UPLOADER ---------- */
+/* ===========================
+   FILE UPLOADER
+=========================== */
 
 [data-testid="stFileUploader"]{
-    background:white !important;
+    background:#FFFFFF !important;
     border:1px solid #DDDDDD;
     border-radius:12px;
     padding:10px;
 }
 
 [data-testid="stFileUploaderDropzone"]{
-    background:white !important;
+    background:#FFFFFF !important;
     border:2px dashed #CCCCCC;
 }
 
 [data-testid="stFileUploader"] *{
-    color:black !important;
+    color:#111111 !important;
 }
 
-/* ---------- METRICS ---------- */
+/* ===========================
+   METRIC CARDS
+=========================== */
 
 div[data-testid="stMetric"]{
-    background:white;
-    border:1px solid #E5E5E5;
-    border-radius:10px;
+    background:#FFFFFF;
+    border:1px solid #DDDDDD;
+    border-radius:12px;
     padding:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
 div[data-testid="stMetricLabel"]{
-    color:#444 !important;
+    color:#555555 !important;
 }
 
 div[data-testid="stMetricValue"]{
-    color:#111 !important;
+    color:#111111 !important;
+    font-weight:bold;
 }
 
-/* ---------- RADIO ---------- */
+/* ===========================
+   RADIO BUTTONS
+=========================== */
 
 div[role="radiogroup"]{
     gap:18px;
 }
 
 div[role="radiogroup"] label{
-    color:black !important;
-    font-weight:600;
+    color:#111111 !important;
+    font-weight:600 !important;
     opacity:1 !important;
 }
 
-/* ---------- HEADINGS ---------- */
+/* ===========================
+   HEADINGS
+=========================== */
 
-h1,h2,h3,h4{
+h1,h2,h3,h4,h5,h6{
     color:#111827 !important;
+}
+
+/* ===========================
+   NORMAL TEXT
+=========================== */
+
+p,
+li,
+span{
+    color:#222222 !important;
+    font-size:16px;
+    line-height:1.6;
+}
+
+strong,
+b{
+    color:#111827 !important;
+}
+
+/* Streamlit markdown container */
+
+[data-testid="stMarkdownContainer"]{
+    color:#222222 !important;
+}
+
+[data-testid="stMarkdownContainer"] *{
+    color:#222222 !important;
+}
+
+/* ===========================
+   DATAFRAME
+=========================== */
+
+[data-testid="stDataFrame"]{
+    background:white !important;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+table{
+    color:#222222 !important;
+}
+
+th{
+    color:#111111 !important;
+}
+
+td{
+    color:#222222 !important;
 }
 
 </style>
