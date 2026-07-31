@@ -33,31 +33,53 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Main App */
+/* ---------- MAIN APP ---------- */
+
 .stApp{
-    background-color:white;
-    color:black;
+    background-color:white !important;
 }
 
-/* Sidebar */
+[data-testid="stAppViewContainer"]{
+    background:white !important;
+}
+
+[data-testid="stHeader"]{
+    background:white !important;
+}
+
+/* ---------- SIDEBAR ---------- */
+
 section[data-testid="stSidebar"]{
-    background-color:#F5F5F5;
+    background:#F5F5F5 !important;
 }
 
 section[data-testid="stSidebar"] *{
     color:black !important;
 }
 
-/* Headings */
-h1,h2,h3,h4{
-    color:#0E1117 !important;
-    text-shadow:none;
+/* ---------- FILE UPLOADER ---------- */
+
+[data-testid="stFileUploader"]{
+    background:white !important;
+    border:1px solid #DDDDDD;
+    border-radius:12px;
+    padding:10px;
 }
 
-/* Metric Cards */
+[data-testid="stFileUploaderDropzone"]{
+    background:white !important;
+    border:2px dashed #CCCCCC;
+}
+
+[data-testid="stFileUploader"] *{
+    color:black !important;
+}
+
+/* ---------- METRICS ---------- */
+
 div[data-testid="stMetric"]{
-    background:#FFFFFF;
-    border:1px solid #DDDDDD;
+    background:white;
+    border:1px solid #E5E5E5;
     border-radius:10px;
     padding:15px;
 }
@@ -70,27 +92,30 @@ div[data-testid="stMetricValue"]{
     color:#111 !important;
 }
 
+/* ---------- RADIO ---------- */
+
+div[role="radiogroup"]{
+    gap:18px;
+}
+
+div[role="radiogroup"] label{
+    color:black !important;
+    font-weight:600;
+    opacity:1 !important;
+}
+
+/* ---------- HEADINGS ---------- */
+
+h1,h2,h3,h4{
+    color:#111827 !important;
+}
+
 </style>
-""",unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Make matplotlib/seaborn plots blend with the dark theme
-plt.rcParams.update(
-    {
-        "figure.facecolor": "#1a0000",
-        "axes.facecolor": "#1a0000",
-        "axes.edgecolor": "#f5e6e6",
-        "axes.labelcolor": "#f5e6e6",
-        "text.color": "#f5e6e6",
-        "xtick.color": "#f5e6e6",
-        "ytick.color": "#f5e6e6",
-        "grid.color": "#4a0000",
-        "figure.edgecolor": "#1a0000",
-        "savefig.facecolor": "#1a0000",
-    }
-)
 plt.style.use("default")
-sns.set_style("whitegrid")
-
+sns.set_theme(style="whitegrid")
 
 # ----------------------------------------------------------------------
 # DATA LOADING
@@ -282,15 +307,18 @@ elif page == "📊 EDA Charts":
     st.caption("All charts from the MovieIQ EDA, grouped for quick access")
 
     toggle = st.radio(
-        "Chart group",
-        ["Total Rows", "Highest Revenue Movie", "Popular Genre", "Maximum Perfect Ratio"],
-        horizontal=True,
-        label_visibility="collapsed",
-    )
+    "Choose Analysis",
+    [
+        "📈 Budget & Revenue",
+        "🎬 Genre Analysis",
+        "💰 ROI Analysis"
+    ],
+    horizontal=True
+)
     st.divider()
 
     # ---------------- Total Rows: distributions & overall relationships -------
-    if toggle == "Total Rows":
+    if toggle=="📈 Budget & Revenue":
         st.subheader("Dataset-wide Distributions & Relationships")
 
         c1, c2 = st.columns(2)
@@ -353,7 +381,7 @@ elif page == "📊 EDA Charts":
         )
 
     # ---------------- Popular Genre: genre-focused charts ----------------------
-    elif toggle == "Popular Genre":
+    elif toggle=="🎬 Genre Analysis":
         st.subheader("Genre Popularity vs. Success")
 
         summary = df.groupby("genres", observed=False).agg(
@@ -409,7 +437,7 @@ elif page == "📊 EDA Charts":
         )
 
     # ---------------- Maximum Perfect Ratio: ROI / success charts -------------
-    elif toggle == "Maximum Perfect Ratio":
+    elif toggle=="💰 ROI Analysis":
         st.subheader("Return on Investment (Revenue ÷ Budget)")
 
         roi = df[["title", "perfect_ratio"]].dropna().sort_values(
